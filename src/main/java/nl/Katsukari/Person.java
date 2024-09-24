@@ -33,6 +33,7 @@ public class Person {
                     int age = scanner.nextInt();
                     people.put(name, age);
                     System.out.println(name + " has been added.\n");
+                    break;
 
                 // Remove a name from hashmap
                 case 2:
