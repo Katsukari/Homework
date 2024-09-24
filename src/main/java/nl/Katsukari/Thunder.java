@@ -11,7 +11,7 @@ public class Thunder {
         // Loop to keep asking for seconds between lightning and thunder
         while (true) {
             // Ask user for preferred unit of measurement
-            System.out.print("Would you like to calculate the distance in kilometers or feet?: ");
+            System.out.print("Would you like to calculate the distance in km or feet?: ");
             String unit = scanner.next();
 
             // If measurement is invalid, let the user know and choose again
