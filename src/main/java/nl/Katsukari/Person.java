@@ -7,38 +7,37 @@ public class Person {
     public static void main(String[] args) {
         // Create hashmap, name key / age value
         HashMap<String, Integer> people = new HashMap<>();
-        Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
         // Give the user the options
         while (running) {
             System.out.println("""
                 Choose an option:
+                0. Go back to start
                 1. Add a person
                 2. Remove a person
                 3. Show all people
-                4. Exit
-                Your choice:""");
+                4. Exit""");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            // Ask input
+            String chosenOption = askForInput("Choose an option: ");
 
+            switch (chosenOption) {
+                // Return to menu
+                case "0":
+                    return;
 
-            switch (choice) {
-                // Add a name to the hashmap
-                case 1:
-                    System.out.print("Enter name to add: ");
-                    String name = scanner.nextLine();
-                    System.out.print("Enter age: ");
-                    int age = scanner.nextInt();
+                // Add name to Hashmap
+                case "1":
+                    String name = askForInput("Enter name to add: ");
+                    Integer age = Integer.parseInt(askForInput("Enter age: "));
                     people.put(name, age);
                     System.out.println(name + " has been added.\n");
                     break;
 
-                // Remove a name from hashmap
-                case 2:
-                    System.out.print("Enter name to remove: ");
-                    String nameRemove = scanner.nextLine();
+                // Remove name from Hashmap, if available
+                case "2":
+                    String nameRemove = askForInput("Enter name to remove: ");
                     if (people.containsKey(nameRemove)) {
                         people.remove(nameRemove);
                         System.out.println(nameRemove + " has been removed.\n");
@@ -47,31 +46,34 @@ public class Person {
                     }
                     break;
 
-                // Show all people in hashmap, if there's anything to show
-                case 3:
+                // Show names in Hashmap, if there's anything to show
+                case "3":
                     if (people.isEmpty()) {
-                        System.out.println("There are no people in the list.\n");
+                        System.out.println("There are no people available.\n");
                     } else {
-                        System.out.println("List of people: ");
                         for (String personName : people.keySet()) {
                             System.out.println("Name: " + personName + ", Age: " + people.get(personName));
                         }
-                        System.out.println();
                     }
                     break;
 
-                // Quit program if user said so
-                case 4:
-                    System.out.println("Quitting...");
+                // Exit program
+                case "4":
+                    System.out.println("Exiting...");
                     running = false;
                     break;
 
-                // if input doesn't match anything, ask again
+                // If option doesn't exist, prompt again
                 default:
-                    System.out.println("Invalid choice. Please choose a legitimate 1.\n");
+                    System.out.println("You chose an non-existing option, choose again.\n");
                     break;
             }
         }
-        scanner.close();
+    }
+    // Enable the askForInput and save the input to be used
+    static String askForInput(String question){
+        Scanner input = new Scanner(System.in);
+        System.out.println(question);
+        return input.next();
     }
 }
