@@ -69,17 +69,18 @@ public class AddingPerson {
 
                 // Remove a person
                 case "2":
-                    String nameToRemove = askForInput("Enter name to remove: ");
+                    while (true) {
+                        String nameToRemove = askForInput("Enter name to remove: ");
 
-                    // Use lambda for cleaner code. Check if a person (p) matches input given
-                    if (persons.removeIf(p -> p.name.equals(nameToRemove))) {
-                        // Remove if true
-                        System.out.println(nameToRemove + " has been removed.\n");
-                    } else {
-                        System.out.println("Name not found. Please try again.\n");
-                        break; // This still goes back to main menu???? No clue why
+                        // Use lambda for cleaner code. Check if a person (p) matches input given
+                        if (persons.removeIf(p -> p.name.equals(nameToRemove))) {
+                            // Remove if true
+                            System.out.println(nameToRemove + " has been removed.\n");
+                            continue;
+                        } else {
+                            System.out.println("Name not found. Please try again.\n");
+                        }
                     }
-                    break;
 
                 // Show all people, if there's anything to show
                 case "3":
